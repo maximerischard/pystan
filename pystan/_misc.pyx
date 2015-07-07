@@ -11,7 +11,7 @@ cpdef get_kept_samples(int n, dict sim):
     cdef double[:] s, ss
     cdef long[:] perm
     num_chains = sim['chains']
-    nth_key = list(sim['samples'][0]['chains'].keys())[n]
+    nth_key = sim['fnames_oi'][n]
 
     # the following assumes each chain has same length, same warmup
     num_samples = sim['samples'][0]['chains'][nth_key].shape[0]
@@ -41,7 +41,7 @@ cpdef get_samples(int n, dict sim, inc_warmup):
     # the following assumes each chain has same length, same warmup
     cdef int num_warmup = sim['warmup2'][0]
 
-    nth_key = list(sim['samples'][0]['chains'].keys())[n]
+    nth_key = sim['fnames_oi'][n]
     ss = []
     for i in range(num_chains):
         s = sim['samples'][i]['chains'][nth_key]
